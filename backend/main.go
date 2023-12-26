@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -15,6 +16,50 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
+}
+
+type Message struct {
+	Username string `json:"username"`
+	Content  string `json:"content"`
+}
+
+var clients = make(map[*websocket.Conn]bool)
+var broadcast = make(chan Message)
+
+func HandleWebsocketConnection(ctx *gin.Context) {
+	ws, err := upgrader.Upgrade(ctx.Writer, ctx.Request, nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer ws.Close()
+
+	clients[ws] = true
+
+	for {
+		var msg Message
+		err := ws.ReadJSON(&msg)
+		if err != nil {
+			fmt.Printf("error: %v", err)
+			delete(clients, ws)
+			return
+		}
+		broadcast <- msg
+	}
+}
+
+func HandleMessages() {
+	for {
+		msg := <-broadcast
+		for client := range clients {
+			err := client.WriteJSON(msg)
+			if err != nil {
+				log.Printf("error %v", err)
+				client.Close()
+				delete(clients, client)
+			}
+		}
+	}
 }
 
 func main() {
@@ -34,26 +79,9 @@ func main() {
 		})
 	})
 
-	router.GET("/ws", func(ctx *gin.Context) {
-		conn, err := upgrader.Upgrade(ctx.Writer, ctx.Request, nil)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer conn.Close()
+	router.GET("/ws", HandleWebsocketConnection)
 
-		for {
-			messageType, p, err := conn.ReadMessage()
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-			if err := conn.WriteMessage(messageType, p); err != nil {
-				fmt.Println(err)
-				return
-			}
-		}
-	})
+	go HandleMessages()
 
 	err := router.Run(":8080")
 	if err != nil {
