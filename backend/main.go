@@ -6,7 +6,16 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 )
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
 
 func main() {
 	fmt.Println("Starting the Golang server...")
@@ -23,6 +32,27 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Hello, Golang Server!",
 		})
+	})
+
+	router.GET("/ws", func(ctx *gin.Context) {
+		conn, err := upgrader.Upgrade(ctx.Writer, ctx.Request, nil)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		defer conn.Close()
+
+		for {
+			messageType, p, err := conn.ReadMessage()
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			if err := conn.WriteMessage(messageType, p); err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
 	})
 
 	err := router.Run(":8080")
