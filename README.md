@@ -8,9 +8,9 @@ Real-time Collaboration Dashboard
 2. Use the following command to run the project in root directory.
 
 ```shell
-# for first time usage
+# for rebuilding image
 docker-compose up --build
 
-# from next time
+# for running with out rebuilding the image
 docker-compose up
 ```
