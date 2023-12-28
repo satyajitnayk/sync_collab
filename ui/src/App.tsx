@@ -1,8 +1,9 @@
-// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import JoinPage from './components/JoinPage';
 import ChatPage from './components/ChatPage';
+import TextEditor from './components/TextEditor';
+import './App.css';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           path="/chat/:chatroomId"
           element={<ChatPage username="placeholder" />}
         />
+        <Route path="/doc" element={<TextEditor />} />
       </Routes>
     </Router>
   );
