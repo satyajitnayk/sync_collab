@@ -19,11 +19,11 @@ export const DragAndDrop = () => {
     useDragAndDrop(data);
   return (
     <div className="dnd-grid">
-      {projectStatuses.map((container) => (
+      {projectStatuses.map((status) => (
         <ContainerCards
           items={listItems}
-          status={container}
-          key={container}
+          status={status}
+          key={status}
           isDragging={isDragging}
           handleDragging={handleDragging}
           handleUpdateList={handleUpdateList}

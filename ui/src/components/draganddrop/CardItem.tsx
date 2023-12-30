@@ -15,7 +15,7 @@ export const CardItem = ({ data, handleDragging }: Props) => {
 
   return (
     <div
-      className="card"
+      className="card-item"
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
