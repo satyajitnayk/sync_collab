@@ -4,6 +4,8 @@ import JoinPage from './components/JoinPage';
 import ChatPage from './components/ChatPage';
 import TextEditor from './components/TextEditor';
 import './App.css';
+import { ProjectMangement } from './components/draganddrop/ProjectMangement';
+import NotFoundPage from './components/NotFoundPage';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -22,6 +24,9 @@ const App: React.FC = () => {
           element={<ChatPage username="placeholder" />}
         />
         <Route path="/doc" element={<TextEditor />} />
+        <Route path="/project" element={<ProjectMangement />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );
