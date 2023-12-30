@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Ball } from '../../interfaces';
 import '../../css/BouncingBall.css';
+const MAX_BALLS = 10;
+const MIN_GAP_FOR_NEW_BALL = 150;
+const DAMPING_FACTOR = 0.99; // energy preserved
 
 const initialBalls: Ball[] = [
   {
@@ -12,8 +15,8 @@ const initialBalls: Ball[] = [
   },
   {
     id: 2,
-    x: 60,
-    y: 70,
+    x: 55,
+    y: 55,
     speedX: 2,
     speedY: 1,
   },
@@ -24,6 +27,16 @@ export const BouncingBalls = () => {
   const [ballCount, setBallCount] = useState<number>(initialBalls.length);
   const [isAnimating, setIsAnimating] = useState<boolean>(true);
   const boxRef = useRef<HTMLDivElement | null>(null);
+
+  // method that tell if new ball is good - not merged with existing balls
+  const isCurrentBallGood = (x: number, y: number): boolean => {
+    return balls.every((ball) => {
+      const dx = ball.x - x;
+      const dy = ball.y - y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      return distance >= MIN_GAP_FOR_NEW_BALL;
+    });
+  };
 
   const updateBalls = () => {
     setBalls((prevBalls) => {
@@ -61,6 +74,11 @@ export const BouncingBalls = () => {
 
   const checkCollisions = () => {
     setBalls((prevBalls) => {
+      if (prevBalls.length >= MAX_BALLS) {
+        return prevBalls;
+      }
+      let collisionOccurred = false;
+
       const newBalls = [...prevBalls];
       for (let i = 0; i < newBalls.length; ++i) {
         for (let j = i + 1; j < newBalls.length; ++j) {
@@ -68,30 +86,40 @@ export const BouncingBalls = () => {
           const dy = newBalls[j].y - newBalls[i].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 20) {
+          if (distance < 2 && !collisionOccurred) {
+            collisionOccurred = true;
             // Generate a new ball at the point of collision
             const collisionX = (newBalls[i].x + newBalls[j].x) / 2;
             const collisionY = (newBalls[i].y + newBalls[j].y) / 2;
             const id = newBalls.length + 1;
-            const speedX = 1;
-            const speedY = 1.5;
+            const speedX = 1 * DAMPING_FACTOR;
+            const speedY = 1.5 * DAMPING_FACTOR;
 
-            newBalls.push({
-              id,
-              x: collisionX,
-              y: collisionY,
-              speedX,
-              speedY,
-            });
-            setBallCount((prevCount) => prevCount + 1);
+            // check if new ball is too near to any balls
 
-            // Reverse the directions of colliding balls
-            newBalls[i].speedX *= -1;
-            newBalls[i].speedY *= -1;
-            newBalls[j].speedX *= -1;
-            newBalls[j].speedY *= -1;
+            if (
+              newBalls.length < MAX_BALLS &&
+              isCurrentBallGood(collisionX, collisionY)
+            ) {
+              newBalls.push({
+                id,
+                x: collisionX,
+                y: collisionY,
+                speedX,
+                speedY,
+              });
+              setBallCount((prevCount) => prevCount + 1);
+
+              // Reverse the directions of colliding balls
+              newBalls[i].speedX *= -1;
+              newBalls[i].speedY *= -1;
+              newBalls[j].speedX *= -1;
+              newBalls[j].speedY *= -1;
+            }
+            break;
           }
         }
+        if (collisionOccurred) break;
       }
 
       return newBalls;
