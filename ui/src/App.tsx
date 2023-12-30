@@ -8,6 +8,7 @@ import { ProjectMangement } from './components/draganddrop/ProjectMangement';
 import NotFoundPage from './components/NotFoundPage';
 import { ContextInImageSize } from './components/contextpage/ContextInImageSize';
 import { ContextInHeading } from './components/contextpage/ContextInHeading';
+import { BouncingBalls } from './components/bouncingballs/BouncingBall';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Route path="/project" element={<ProjectMangement />} />
         <Route path="/context/imagesize" element={<ContextInImageSize />} />
         <Route path="/context/headings" element={<ContextInHeading />} />
+        <Route path="/bounceballs" element={<BouncingBalls />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

@@ -25,3 +25,11 @@ export interface Place {
   description: string;
   imageId: string;
 }
+
+export interface Ball {
+  id: number;
+  x: number;
+  y: number;
+  speedX: number;
+  speedY: number;
+}
