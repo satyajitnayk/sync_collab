@@ -27,7 +27,7 @@ export const ContainerCards = ({
 
   return (
     <div
-      className={`layout-cards ${isDragging ? 'layout-dragging' : ''}`}
+      className={`container-cards ${isDragging ? 'layout-dragging' : ''}`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
