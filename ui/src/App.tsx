@@ -6,6 +6,7 @@ import TextEditor from './components/TextEditor';
 import './App.css';
 import { ProjectMangement } from './components/draganddrop/ProjectMangement';
 import NotFoundPage from './components/NotFoundPage';
+import { ContextPage } from './components/contextpage/ContextPage';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -25,7 +26,7 @@ const App: React.FC = () => {
         />
         <Route path="/doc" element={<TextEditor />} />
         <Route path="/project" element={<ProjectMangement />} />
-
+        <Route path="/context" element={<ContextPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
