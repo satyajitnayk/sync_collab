@@ -18,3 +18,10 @@ export interface Data {
   content: string;
   status: Status;
 }
+
+export interface Place {
+  id: number;
+  name: string;
+  description: string;
+  imageId: string;
+}
