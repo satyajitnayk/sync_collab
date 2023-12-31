@@ -2,10 +2,12 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	auth "github.com/satyajitnayk/sync_collab/config"
 	"github.com/satyajitnayk/sync_collab/models"
 	"github.com/satyajitnayk/sync_collab/repositories"
 	"golang.org/x/crypto/bcrypt"
@@ -79,4 +81,47 @@ func RegisterUser(c *gin.Context, db *gorm.DB) {
 
 	response := RegisterResponse{Message: "User registered successfully"}
 	sendJsonResponse(c.Writer, http.StatusCreated, response)
+}
+
+func LoginUser(c *gin.Context, db *gorm.DB) {
+	var request LoginRequest
+	if err := c.ShouldBindJSON(&request); err != nil {
+		response := LoginResponse{ErrorMessage: "Invalid login payload"}
+		sendJsonResponse(c.Writer, http.StatusBadRequest, response)
+		return
+	}
+	if request.Email == "" || request.Password == "" {
+		response := LoginResponse{ErrorMessage: "Email & Password are requied"}
+		sendJsonResponse(c.Writer, http.StatusBadRequest, response)
+		return
+	}
+
+	userRepo := repositories.NewUserRepository(db)
+
+	user, err := userRepo.FindByEmail(request.Email)
+	if err != nil {
+		response := LoginResponse{ErrorMessage: "Failed to login"}
+		sendJsonResponse(c.Writer, http.StatusBadRequest, response)
+		return
+	}
+
+	// compare password
+	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.Password)) == nil {
+		//jwt
+		jwt, err := auth.GenerateJWT(request.Email)
+		if err != nil {
+			fmt.Print(err)
+			response := LoginResponse{ErrorMessage: "Unable to generate token"}
+			sendJsonResponse(c.Writer, http.StatusInternalServerError, response)
+			return
+		} else {
+			response := LoginResponse{Token: jwt}
+			sendJsonResponse(c.Writer, http.StatusOK, response)
+			return
+		}
+	} else {
+		response := LoginResponse{ErrorMessage: "Failed to login"}
+		sendJsonResponse(c.Writer, http.StatusUnauthorized, response)
+		return
+	}
 }

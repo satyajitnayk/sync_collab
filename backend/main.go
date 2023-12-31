@@ -53,6 +53,10 @@ func main() {
 		handlers.RegisterUser(ctx, db)
 	})
 
+	router.POST("/login", func(ctx *gin.Context) {
+		handlers.LoginUser(ctx, db)
+	})
+
 	go handlers.HandleMessages()
 
 	serverRunError := router.Run(":8080")
