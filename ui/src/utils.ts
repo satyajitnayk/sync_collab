@@ -62,3 +62,10 @@ export const getAuthTokenFromCookie = (): string | undefined => {
 export const removeAuthTokenCookie = (): void => {
   Cookies.remove('token', { path: '/' });
 };
+
+export const shortenStr = (input: string, maxLength: number = 20): string => {
+  if (input.length <= maxLength) {
+    return input;
+  }
+  return input.substring(0, maxLength - 3) + '...';
+};

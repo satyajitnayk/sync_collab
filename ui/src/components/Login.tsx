@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import '../css/Registration.css';
+import '../css/Login.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../css/Registration.css';
 import { useLogin } from '../hooks/useLogin';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ export const Login = () => {
       />
       <button onClick={() => handleLogin(email, password)}>Login</button>
       <p>
-        new user? <Link to="/register">register</Link>
+        new user? <Link to="/signup">register</Link>
       </p>
       <ToastContainer />
     </div>

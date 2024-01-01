@@ -1,4 +1,4 @@
-import { Data, Place } from '../interfaces';
+import { Data, Place, TextDocument } from '../interfaces';
 
 export const data: Data[] = [
   {
@@ -87,5 +87,97 @@ export const places: Place[] = [
     description:
       'In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.',
     imageId: 'ZfQOOzf',
+  },
+];
+
+export const documents: TextDocument[] = [
+  {
+    id: 1,
+    userId: 101,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<div>tempor ut Lorem sed eiusmod consectetur tempor ipsum sit consectetur</div>',
+    fileName: 'file_5w445sfrfrgvfbfdi',
+  },
+  {
+    id: 2,
+    userId: 102,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<div>ipsum magna elit incididunt ipsum</div><strong>adipiscing</strong><span>ipsum magna</span>',
+    fileName: 'file_rw445cfrfrgvf4or8',
+  },
+  {
+    id: 3,
+    userId: 103,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<a>sed amet dolore do</a><strong>tempor labore tempor do sit</strong><p>adipiscing sed ipsum ipsum sit</p><a>et do</a><a>amet amet labore dolor elit eiusmod elit dolore aliqua</a>',
+    fileName: 'file_rw445hfrfrgvfsqds',
+  },
+  {
+    id: 4,
+    userId: 104,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<a>magna ut adipiscing sed consectetur ipsum ipsum sit adipiscing adipiscing</a><a>sed</a><div>dolore aliqua ut tempor amet labore Lorem Lorem</div><div>do amet elit elit tempor et labore tempor adipiscing Lorem</div><span>aliqua</span>',
+    fileName: 'file_gw445efrfrgvflfsr',
+  },
+  {
+    id: 5,
+    userId: 105,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<span>eiusmod incididunt elit ut ut et dolore consectetur</span><p>adipiscing Lorem aliqua ut</p>',
+    fileName: 'file_ow445pfrfrgvfkjao',
+  },
+  {
+    id: 6,
+    userId: 106,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content: '<em>adipiscing Lorem ut tempor aliqua adipiscing</em>',
+    fileName: 'file_xw445ffrfrgvfsgo6',
+  },
+  {
+    id: 7,
+    userId: 107,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<span>ut amet dolore</span><strong>elit incididunt tempor</strong><em>ut sit</em><em>do et tempor consectetur dolore sit dolor Lorem</em><a>et incididunt aliqua eiusmod ut elit dolore adipiscing adipiscing</a>',
+    fileName: 'file_xw4451frfrgvfumez',
+  },
+  {
+    id: 8,
+    userId: 108,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<p>do dolore elit do dolor Lorem dolor</p><em>sed sit incididunt sit ipsum adipiscing Lorem sed</em>',
+    fileName: 'file_ww4451frfrgvfmlso',
+  },
+  {
+    id: 9,
+    userId: 109,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<p>eiusmod incididunt</p><span>sed sit dolor incididunt aliqua magna adipiscing tempor do dolor</span>',
+    fileName: 'file_5w4458frfrgvf944f',
+  },
+  {
+    id: 10,
+    userId: 110,
+    createdAt: '2024-01-01T06:03:07.772Z',
+    updatedAt: '2024-01-01T06:03:07.772Z',
+    content:
+      '<span>et aliqua labore do adipiscing</span><em>dolore elit adipiscing dolor ipsum et et ut do labore</em><em>dolor dolore ipsum aliqua</em><strong>elit elit sed do elit sed amet et</strong><a>ut consectetur ipsum adipiscing Lorem sed magna</a>',
+    fileName: 'file_rw445lfrfrgvfvkmt',
   },
 ];

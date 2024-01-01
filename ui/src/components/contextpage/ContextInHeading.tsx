@@ -1,6 +1,6 @@
 import '../../css/HeadingUsage.css';
 import { useContext } from 'react';
-import { LevelContext } from './Context';
+import { LevelContext } from '../../context/Context';
 
 // For more Read:  https://react.dev/learn/passing-data-deeply-with-context
 export const ContextInHeading = () => {
