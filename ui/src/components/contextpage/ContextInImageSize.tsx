@@ -3,7 +3,7 @@ import { places } from '../../assets';
 import { getImageUrl } from '../../utils';
 import { Place } from '../../interfaces';
 import '../../css/ContextInImageSize.css';
-import { ImageSizeContext } from './Context';
+import { ImageSizeContext } from '../Context';
 
 // For more Read:  https://react.dev/learn/passing-data-deeply-with-context
 export const ContextInImageSize = () => {
