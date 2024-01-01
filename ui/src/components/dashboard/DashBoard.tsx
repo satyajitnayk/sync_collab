@@ -1,46 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import {
-  getAuthTokenFromCookie,
-  removeAuthTokenCookie,
-  shortenStr,
-} from '../../utils';
-import { useEffect, useState } from 'react';
+import { removeAuthTokenCookie, shortenStr } from '../../utils';
 import TextEditor from '../TextEditor';
+import { useDashBoard } from '../../hooks/useDashBoard';
+import { useNavigate } from 'react-router-dom';
 
 import '../../css/DashBoard.css';
-import { useDocuments } from '../../context/DocumentsContext';
-import { TextDocument } from '../../interfaces';
 
 export const DashBoard = () => {
-  const [currentContent, setCurrentContent] = useState<string>('');
-  const { documents, updateDocuments } = useDocuments();
-
   const navigate = useNavigate();
-
-  const handleDocumentClick = (documentId: number) => {
-    navigate(`/document/${documentId}`);
-  };
-
-  const saveNewFile = () => {
-    if (currentContent === '') return;
-    const newDocInfo: TextDocument = {
-      userId: Math.floor(Math.random() * 1000),
-      id: Math.floor(Math.random() * 100),
-      fileName: 'file_' + Math.random().toString(36).substring(2, 15),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      content: currentContent,
-    };
-    console.log([...documents, newDocInfo]);
-    updateDocuments([...documents, newDocInfo]);
-  };
-
-  useEffect(() => {
-    const isLoggedIn = getAuthTokenFromCookie() ? true : false;
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, []);
+  const { documents, handleDocumentClick, saveNewFile, setCurrentContent } =
+    useDashBoard();
 
   return (
     <>
