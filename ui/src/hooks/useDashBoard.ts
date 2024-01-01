@@ -28,6 +28,10 @@ export const useDashBoard = () => {
     updateDocuments([...documents, newDocInfo]);
   };
 
+  const deleteFile = (documentId: number) => {
+    updateDocuments([...documents.filter((d) => d.id !== documentId)]);
+  };
+
   useEffect(() => {
     const isLoggedIn = getAuthTokenFromCookie() ? true : false;
     if (!isLoggedIn) {
@@ -41,5 +45,6 @@ export const useDashBoard = () => {
     documents,
     handleDocumentClick,
     saveNewFile,
+    deleteFile,
   };
 };

@@ -7,8 +7,13 @@ import '../../css/DashBoard.css';
 
 export const DashBoard = () => {
   const navigate = useNavigate();
-  const { documents, handleDocumentClick, saveNewFile, setCurrentContent } =
-    useDashBoard();
+  const {
+    documents,
+    handleDocumentClick,
+    saveNewFile,
+    setCurrentContent,
+    deleteFile,
+  } = useDashBoard();
 
   return (
     <>
@@ -38,6 +43,19 @@ export const DashBoard = () => {
                 style={{ cursor: 'pointer' }}
               >
                 {shortenStr(document.fileName)}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteFile(document.id);
+                  }}
+                  style={{
+                    border: 'none',
+                    background: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  🗑️
+                </button>
               </div>
             ))}
           </div>
