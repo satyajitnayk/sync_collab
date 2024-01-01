@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { documents } from '../../assets';
-import { getAuthTokenFromCookie, shortenStr } from '../../utils';
+import {
+  getAuthTokenFromCookie,
+  removeAuthTokenCookie,
+  shortenStr,
+} from '../../utils';
 import { useEffect } from 'react';
 import TextEditor from '../TextEditor';
 
 import '../../css/DashBoard.css';
-import { CreateNewFile } from './CreateNewFileModal';
+import { CreateNewFile } from './CreateNewFile';
 
 export const DashBoard = () => {
   const navigate = useNavigate();
@@ -27,6 +31,14 @@ export const DashBoard = () => {
         <div className="dashboard-header">
           <h3>Welcome Satya!!</h3>
           <button>save</button>
+          <button
+            onClick={() => {
+              removeAuthTokenCookie();
+              navigate('/login');
+            }}
+          >
+            Logout
+          </button>
         </div>
 
         <div className="dashboard-content">
