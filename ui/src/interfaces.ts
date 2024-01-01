@@ -33,3 +33,11 @@ export interface Ball {
   speedX: number;
   speedY: number;
 }
+export interface TextDocument {
+  id: number;
+  userId: number;
+  createdAt: string; // Assuming createdAt and updatedAt are represented as strings
+  updatedAt: string;
+  content: string;
+  fileName: string;
+}

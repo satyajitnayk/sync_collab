@@ -2,6 +2,7 @@ import { Status } from '../../interfaces';
 import { ContainerCards } from './ContainerCards';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 import { data } from '../../assets';
+import '../../css/DragAndDrop.css';
 
 const projectStatuses: Status[] = [
   'New',

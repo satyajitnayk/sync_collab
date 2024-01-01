@@ -1,0 +1,33 @@
+.dashboard-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboard-conatiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.document {
+  width: 200px;
+  height: 30px;
+  border: 1px dotted;
+  padding: 5px;
+  margin: 5px;
+}
+
+.document-content {
+  border: 2px solid;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid purple;
+  padding: 10px;
+}

@@ -1,7 +1,7 @@
 import 'quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 
-const TextEditor = () => {
+const TextEditor = ({ content = '' }: { content?: string }) => {
   var modules = {
     toolbar: [
       [{ size: ['small', false, 'large', 'huge'] }],
@@ -88,6 +88,7 @@ const TextEditor = () => {
       <div style={{ display: 'grid', justifyContent: 'center' }}>
         <ReactQuill
           theme="snow"
+          value={content}
           modules={modules}
           formats={formats}
           placeholder="write your content ...."

@@ -1,0 +1,35 @@
+.dnd-grid {
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+}
+
+.container-cards {
+  border: 1px solid;
+  width: 200px;
+  height: 700px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.container-cards > p {
+  background-color: grey;
+  color: white;
+  font-size: x-large;
+  width: auto;
+}
+
+.card-item {
+  width: auto;
+  height: auto;
+  padding: 5px;
+  border: 1px dotted;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: aliceblue;
+}
+
+.layout-dragging {
+  border: 2px dotted;
+}
