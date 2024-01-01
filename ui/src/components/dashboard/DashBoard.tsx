@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import TextEditor from '../TextEditor';
 
 import '../../css/DashBoard.css';
-import { CreateNewFile } from './CreateNewFile';
 import { useDocuments } from '../../context/DocumentsContext';
 import { TextDocument } from '../../interfaces';
 
@@ -79,7 +78,6 @@ export const DashBoard = () => {
           </div>
         </div>
       </div>
-      <CreateNewFile />
     </>
   );
 };
