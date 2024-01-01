@@ -1,6 +1,6 @@
-// src/ChatPage.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { webSocketURL } from '../config';
 
 interface Message {
   username: string;
@@ -18,7 +18,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ username }) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:8080/ws?chatroomId=${chatroomId}`);
+    const ws = new WebSocket(`${webSocketURL}?chatroomId=${chatroomId}`);
 
     ws.onmessage = (event) => {
       const message: Message = JSON.parse(event.data);
