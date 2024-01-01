@@ -1,0 +1,31 @@
+.create-new-file {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.create-new-file button {
+  background-color: #007bff; /* Add your preferred button styles */
+  color: #ffffff;
+  font-size: 40px;
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.create-new-file button:hover::before {
+  content: 'create new file';
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #050a10;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0.9;
+  pointer-events: none;
+}
