@@ -14,6 +14,7 @@ import { Login } from './components/Login';
 import { DashBoard } from './components/dashboard/DashBoard';
 import { Home } from './components/Home';
 import { TextEditorWithContent } from './components/TextEditorWithContent';
+import { DocumentsProvider } from './context/DocumentsContext';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -29,11 +30,24 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashBoard />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <DocumentsProvider>
+              <DashBoard />
+            </DocumentsProvider>
+          }
+        />
         <Route
           path="/document/:documentId"
-          element={<TextEditorWithContent />}
+          element={
+            <DocumentsProvider>
+              <TextEditorWithContent />
+            </DocumentsProvider>
+          }
         />
+
         <Route path="/joinchat" element={<JoinPage joinChat={joinChat} />} />
         <Route
           path="/chat/:chatroomId"
