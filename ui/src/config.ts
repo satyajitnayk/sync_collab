@@ -1,2 +1,2 @@
-export const apiURL = import.meta.env.REACT_APP_BACKEND_URL;
-export const webSocketURL = import.meta.env.REACT_APP_WEBSOCKET_URL;
+export const apiURL = import.meta.env.VITE_BACKEND_URL as string;
+export const webSocketURL = import.meta.env.VITE_WEBSOCKET_URL as string;

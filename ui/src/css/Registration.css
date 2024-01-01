@@ -1,0 +1,15 @@
+.registration-container,
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+  border: 1px dotted;
+  padding: 15px;
+}
+
+.registration-container,
+.login-container > * {
+  padding: 5px;
+  margin: 10px;
+}
