@@ -9,6 +9,8 @@ import NotFoundPage from './components/NotFoundPage';
 import { ContextInImageSize } from './components/contextpage/ContextInImageSize';
 import { ContextInHeading } from './components/contextpage/ContextInHeading';
 import { BouncingBalls } from './components/bouncingballs/BouncingBall';
+import { Registration } from './components/Registration';
+import { Login } from './components/Login';
 
 const App: React.FC = () => {
   const joinChat = (username: string, chatroomId: string) => {
@@ -21,7 +23,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<JoinPage joinChat={joinChat} />} />
+        <Route path="/signup" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/joinchat" element={<JoinPage joinChat={joinChat} />} />
         <Route
           path="/chat/:chatroomId"
           element={<ChatPage username="placeholder" />}
